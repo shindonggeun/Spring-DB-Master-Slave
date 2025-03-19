@@ -1,44 +1,45 @@
 services:
-  mysql-master:
-    image: mysql:8.0
-    container_name: mysql-master
+  db-write:
+    build:
+      context: ./
+      dockerfile: master/Dockerfile
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: master_db
+      MYSQL_DATABASE: reservation
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
-      - mysql-master-data:/var/lib/mysql
-      - ./master.cnf:/etc/mysql/conf.d/master.cnf
+      - master:/var/lib/mysql
+      - master:/var/lib/mysql-files
     networks:
-      - mysql-network
+      - net-mysql
 
-  mysql-slave:
-    image: mysql:8.0
-    container_name: mysql-slave
+  db-read:
+    build:
+      context: ./
+      dockerfile: slave/Dockerfile
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: slave_db
+      MYSQL_DATABASE: reservation
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3307:3306"
-    depends_on:
-      - mysql-master
     volumes:
-      - mysql-slave-data:/var/lib/mysql
-      - ./slave.cnf:/etc/mysql/conf.d/slave.cnf
+      - slave:/var/lib/mysql
+      - slave:/var/lib/mysql-files
     networks:
-      - mysql-network
+      - net-mysql
 
+# Names our volume
 volumes:
-  mysql-master-data:
-  mysql-slave-data:
+  master:
+  slave:
 
 networks:
-  mysql-network:
+  net-mysql:
     driver: bridge
