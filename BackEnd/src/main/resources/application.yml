@@ -1,15 +1,17 @@
 spring:
   datasource:
     master:
-      jdbc-url: jdbc:mysql://localhost:3306/reservation?serverTimezone=UTC
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/example?serverTimezone=UTC
     slave:
-      jdbc-url: jdbc:mysql://localhost:3307/reservation?serverTimezone=UTC
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3307/example?serverTimezone=UTC
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
