@@ -1,6 +1,7 @@
-package com.example.springdbmasterslave.domain.member.repository;
+package com.example.backend.domain.member.repository;
 
-import com.example.springdbmasterslave.domain.member.entity.Member;
+
+import com.example.backend.domain.member.entity.Member;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,9 +1,9 @@
-package com.example.springdbmasterslave.domain.member.service;
+package com.example.backend.domain.member.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.example.springdbmasterslave.domain.member.entity.Member;
-import com.example.springdbmasterslave.domain.member.repository.MemberRepository;
+import com.example.backend.domain.member.entity.Member;
+import com.example.backend.domain.member.repository.MemberRepository;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class MemberServiceTest {
         String email = "donggeun" + System.currentTimeMillis() + "@example.com"; // 중복 방지
 
         // When
-        Member savedMember = memberService.registerMember(name, email);
+        Member savedMember = memberService.createMember(name, email);
 
         stopWatch.stop();
         System.out.println("회원 가입 실행 시간: " + stopWatch.getTotalTimeMillis() + "ms");
@@ -57,8 +57,8 @@ public class MemberServiceTest {
     @Test
     void testGetMemberByEmailPerformance() {
         // Given
-        String email = "test@example.com";
-        memberService.registerMember("Test User", email);
+        String email = "test1@example.com";
+        memberService.createMember("Test User", email);
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
