@@ -1,0 +1,20 @@
+{
+  "Debug": true,
+  "EnableSyslog": false,
+  "ListenAddress": ":3000",
+  "MySQLTopologyUser": "orc_client_user",
+  "MySQLTopologyPassword": "orc_client_password",
+  "MySQLOrchestratorHost": "127.0.0.1",
+  "MySQLOrchestratorPort": 3306,
+  "MySQLOrchestratorDatabase": "orchestrator",
+  "MySQLOrchestratorUser": "orc_server_user",
+  "MySQLOrchestratorPassword": "orc_server_password",
+  "DiscoverByShowSlaveHosts": true,
+  "InstancePollSeconds": 5,
+  "UnseenInstanceForgetHours": 240,
+  "ReadOnly": false,
+  "AuthenticationMethod": "",
+  "HTTPAuthUser": "",
+  "HTTPAuthPassword": "",
+  "PowerAuthUsers": ["*"]
+}
