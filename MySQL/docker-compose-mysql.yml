@@ -14,7 +14,6 @@ services:
       - '3306:3306'
     volumes:
       - db-master:/var/lib/mysql
-      - db-master:/var/lib/mysql-files
     networks:
       - mysql-net
 
@@ -33,9 +32,35 @@ services:
       - '3307:3306'
     volumes:
       - db-slave:/var/lib/mysql
-      - db-slave:/var/lib/mysql-files
     networks:
       - mysql-net
+
+  orchestrator:
+    image: percona/percona-orchestrator:latest
+    container_name: orchestrator
+    ports:
+      - '3000:3000' # Web UI
+    volumes:
+      - ./MySQL/orchestrator/orchestrator.conf.json:/etc/orchestrator.conf.json
+    networks:
+      - mysql-net
+    depends_on:
+      - mysql-master
+      - mysql-slave
+
+  proxysql:
+    image: proxysql/proxysql:latest
+    container_name: proxysql
+    ports:
+      - '6032:6032' # Admin UI
+      - '6033:6033' # MySQL Proxy Port
+    volumes:
+      - ./MySQL/proxysql/proxysql.cnf:/etc/proxysql.cnf
+    networks:
+      - mysql-net
+    depends_on:
+      - mysql-master
+      - mysql-slave
 
 volumes:
   db-master:
