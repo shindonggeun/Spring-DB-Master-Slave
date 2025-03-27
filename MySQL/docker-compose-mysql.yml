@@ -36,12 +36,12 @@ services:
       - mysql-net
 
   orchestrator:
-    image: percona/percona-orchestrator:latest
+    image: openarkcode/orchestrator:latest
     container_name: orchestrator
     ports:
       - '3000:3000' # Web UI
     volumes:
-      - ./MySQL/orchestrator/orchestrator.conf.json:/etc/orchestrator.conf.json
+      - ./orchestrator/orchestrator.conf.json:/etc/orchestrator.conf.json
     networks:
       - mysql-net
     depends_on:
@@ -55,7 +55,7 @@ services:
       - '6032:6032' # Admin UI
       - '6033:6033' # MySQL Proxy Port
     volumes:
-      - ./MySQL/proxysql/proxysql.cnf:/etc/proxysql.cnf
+      - ./proxysql/proxysql.cnf:/etc/proxysql.cnf
     networks:
       - mysql-net
     depends_on:
