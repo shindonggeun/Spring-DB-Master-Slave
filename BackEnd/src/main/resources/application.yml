@@ -1,19 +1,9 @@
 spring:
   datasource:
-    master:
-      hikari:
-        pool-name: Hikari-MASTER
-        username: root
-        password: root
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/example?serverTimezone=UTC
-    slave:
-      hikari:
-        pool-name: Hikari-SLAVE
-        username: root
-        password: root
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3307/example?serverTimezone=UTC
+    url: jdbc:mysql://localhost:6033/example?serverTimezone=UTC
+    username: user
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -28,3 +18,8 @@ spring:
         jdbc:
           batch_size: 100              #   insert/update 쿼리를 원하는 개수만큼 모아서 DB에 날릴 수 있는 옵션
         default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
